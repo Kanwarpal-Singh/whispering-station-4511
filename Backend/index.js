@@ -14,12 +14,12 @@ app.use("/users",UserRouter)
 app.use(authentication)
 // app.use("/posts",postRouter)
 app.use(cors)
-app.listen(3500,()=>{
+app.listen(port,()=>{
     try {
         connection.Promise
         console.log("Connected to DB")
     } catch (error) {
         console.log(error)
     }
-    console.log(`Server is running at ${9090}`)
+    console.log(`Server is running at ${port}`)
 })

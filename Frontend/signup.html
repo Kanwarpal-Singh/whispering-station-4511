@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="icon" href="./ZEE5_logo.svg" type="image/x-icon" />
+
+    <link rel="stylesheet" href="./styles/signup.css">
+
+        <!-- -------------------font Awesome Link------------- -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+      button{
+          background-color: purple;
+          border: none;
+          color: white;
+          padding: 12px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+      .cross{
+      position: fixed;
+      top:4%;
+      right:7%;    
+      z-index: 999;
+  }
+  .cross a{
+      cursor: pointer;
+  }
+    .cross i{
+        font-size: 40px;
+        color: #fff;
+      
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <a class="cross" href="./index.html"><i class="fa-solid fa-xmark"></i></a>
+    <div id="box">
+        <h1>Create a new Account</h1>
+        <p>Create an account to continue enjoying uninterrupted video and personalised experience</p>
+       
+       <a href="https://accounts.google.com/o/oauth2/auth?redirect_uri=storagerelay%3A%2F%2Fhttps%2Fwww.zee5.com%3Fid%3Dauth949064&response_type=permission%20id_token&scope=email%20profile%20openid&openid.realm=&include_granted_scopes=true&client_id=171585693881-93jei1bqpoaejkq5ha63iemuq8bbmoar.apps.googleusercontent.com&ss_domain=https%3A%2F%2Fwww.zee5.com&fetch_basic_profile=true&gsiwebsdk=2"> <img src="https://www.zee5.com/images/google-social-icon-circle.svg?ver=2.50.94" alt="">
+        </a> 
+      
+    <div id="or">
+        or
+    </div>
+
+    <input type="text" class="borderline" id="email" name="Email ID or Mobile Number" placeholder="Enter Phone or Email ID" required >
+    <div class="line"></div>
+<br>
+
+    <input type="name" id="name" class="borderline" name="Name" placeholder="Enter Name" required >
+    <div class="line"></div>
+
+    <select name="gender" class="borderline" id="gender" aria-placeholder="Select Gender">
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Transgender">Transgender</option>
+    </select>
+
+    <input type="number" class="borderline" id="mobile" name="Mobile" placeholder="Enter Mobile" required >
+
+    <input type="date" class="borderline" id="dob" name="DOB" required >
+
+    <div class="line"></div>
+    <div class="line"></div>
+    <br>
+    <input type="password" class="borderline" id="pass"  name="Password" placeholder="Enter Password" required>
+    <div class="line"></div>
+       
+<button style="margin-top: 5%;" onClick="onSignup()" >Sign up</button>
+<br>
+<span>Already Registered?</span> <a href="Login.html">Log In</a>
+</div>
+</body>
+</html>
+<script>
+ const onSignup = ()=>{
+        const payload = {
+            name : document.getElementById("name").value,
+            email : document.getElementById("email").value,
+            gender: document.getElementById("gender").value,
+            mobile: document.getElementById("mobile").value,
+            password: document.getElementById("pass").value,
+            dob: document.getElementById("dob").value
+        }
+        console.log(payload)
+        fetch("http://localhost:9090/users/register",{
+            method:"POST",
+            headers:{
+                "Content-Type":"Application/json"
+            },
+            body:JSON.stringify(payload)
+        }).then(res=>res.json())
+        .then(res=>{
+            alert({"user create successfully":res})}
+            )
+        .catch(err=>console.log(err.msg))
+    }
+</script>

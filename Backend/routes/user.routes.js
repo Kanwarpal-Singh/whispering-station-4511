@@ -11,7 +11,7 @@ UserRouter.get("/",(req,res)=>{
     res.send(allusers)
 })
 UserRouter.post("/register",async(req,res)=>{
-    const {name,email,gender,password,age,city}= req.body;
+    const {name,email,gender,password,mobile,dob}= req.body;
     try {
         const exuser = await UserModel.findOne({email})
         if(exuser){
@@ -22,7 +22,7 @@ UserRouter.post("/register",async(req,res)=>{
                     console.log(err);
                     res.send({"err":err.message})
                 }else{
-                    const user = new UserModel({name,email,password:hashed_pass,gender,age,city,})
+                    const user = new UserModel({name,email,password:hashed_pass,gender,mobile,dob})
                     await user.save()
                     console.log(`Welcome Mr. ${user.name}! you have been registered to the website`)
                     res.send(`Welcome Mr. ${user.name}! you have been registered to the website`)
